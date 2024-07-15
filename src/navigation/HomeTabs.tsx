@@ -14,6 +14,7 @@ const HomeTabs = () => {
             tabBar={({ state, navigation, descriptors, insets}) => (
                 <BottomNavigationBar state={state} navigation={navigation} descriptors={descriptors} insets={insets}/>
             )}
+            screenOptions={{ unmountOnBlur: true }}
         >
             <Tab.Screen 
                 name={screenNames.home} 

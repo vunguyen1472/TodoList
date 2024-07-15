@@ -7,3 +7,13 @@ export const dateUniform = (date: Date, startTime: Date, endTime: Date) => {
 
     return { date, newStartTime, newEndTime }
 }
+
+export const getCurrentDateString = () => {
+    const currentDate = new Date();
+    return currentDate.toLocaleDateString('en-GB', {
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+}

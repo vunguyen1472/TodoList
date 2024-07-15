@@ -8,9 +8,10 @@ import { LightTheme } from "../../constants/theme";
 import { Controller, Form, useForm } from "react-hook-form";
 import FormItem from "./components/FormItem";
 import Stack from "../../components/Stack";
-import { dateUniform } from "../../constants/helpers";
+import { dateUniform } from "../../helpers";
 import { createTask } from "../../providers/taskProvider";
 import { TaskType } from "../../constants/types";
+import { navigate } from "../../navigation/navigation";
 
 type FormValues = {
     title: string,
@@ -53,8 +54,8 @@ const CreateTask = () => {
 
         createTask(newTask)
         .then(() => {
-            
-            console.log("Create task successfully")
+            navigate("Home");
+            // console.log("Create task successfully")
         })
         .catch(error => console.log(error))
     }

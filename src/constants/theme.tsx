@@ -25,6 +25,12 @@ export const LightTheme = {
         background: "#F8F9FA",
 
         outline: "rgba(222,226,230, 0.6)",
-        outlineVariant: "rgb(222,226,230)"
+        outlineVariant: "rgb(222,226,230)",
+
+        elevation: {
+            ...MD3LightTheme.colors.elevation,
+            level1: 'rgb(233,236,239)',
+            level2: 'rgb(248,249,250)'
+        }
     }
 }

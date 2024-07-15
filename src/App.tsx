@@ -7,7 +7,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LightTheme } from "./constants/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeTabs from "./navigation/HomeTabs";
-import { navigationRef } from "./navigation/navigation";
+import { navigationRef, screenNames } from "./navigation/navigation";
+import ViewTask from "./screens/ViewTask/ViewTask";
+import EditTask from "./screens/EditTask/EditTask";
 
 // App setup
 type Props = {
@@ -32,7 +34,11 @@ const Stack = createNativeStackNavigator();
 const App = () => {
     return <AppSetup>
         <Stack.Navigator initialRouteName="HomeTabs">
-            <Stack.Screen name="HomeTabs" component={HomeTabs} options={{headerShown: false}}/>
+            <Stack.Screen name={screenNames.homeTabs} component={HomeTabs} options={{headerShown: false}}/>
+            
+            {/* Routes not shown on home tabs */}
+            <Stack.Screen name={screenNames.viewTask} component={ViewTask} />
+            <Stack.Screen name={screenNames.editTask} component={EditTask} />
         </Stack.Navigator>
     </AppSetup>
 }
