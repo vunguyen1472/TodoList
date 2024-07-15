@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LightTheme } from "./constants/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeTabs from "./navigation/HomeTabs";
+import { navigationRef } from "./navigation/navigation";
 
 // App setup
 type Props = {
@@ -17,7 +18,7 @@ const AppSetup = ({ children }: Props) => {
     return (
         <PaperProvider theme={LightTheme}>
             <GestureHandlerRootView>
-                <NavigationContainer>
+                <NavigationContainer ref={navigationRef}>
                     {children}
                 </NavigationContainer>
             </GestureHandlerRootView>
@@ -30,7 +31,7 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
     return <AppSetup>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="HomeTabs">
             <Stack.Screen name="HomeTabs" component={HomeTabs} options={{headerShown: false}}/>
         </Stack.Navigator>
     </AppSetup>

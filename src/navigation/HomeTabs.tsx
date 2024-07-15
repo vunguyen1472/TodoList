@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { screenNames } from "../constants/screenNames";
+import { screenNames } from "./navigation";
 import Home from "../screens/Home/Home";
 import CreateTask from "../screens/CreateTask/CreateTask";
 import BottomNavigationBar from "../components/BottomNavigationBar";
@@ -10,13 +10,13 @@ const Tab = createBottomTabNavigator();
 const HomeTabs = () => {
     return (  
         <Tab.Navigator
-            initialRouteName={screenNames.Home}
+            initialRouteName={screenNames.home}
             tabBar={({ state, navigation, descriptors, insets}) => (
                 <BottomNavigationBar state={state} navigation={navigation} descriptors={descriptors} insets={insets}/>
             )}
         >
             <Tab.Screen 
-                name={screenNames.Home} 
+                name={screenNames.home} 
                 component={Home} 
                 options={{
                     tabBarLabel: "Home",
@@ -26,7 +26,7 @@ const HomeTabs = () => {
                 }}
             />
             <Tab.Screen
-                name={screenNames.CreateTask}
+                name={screenNames.createTask}
                 component={CreateTask}
                 options={{
                     tabBarLabel: "New Task",
