@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, FlatList, Pressable } from "react-native";
 import { ActivityIndicator, Button, Modal, Portal, Text } from "react-native-paper";
-import { getCategories } from "../../../../providers/categoryProvider";
+import { getCategories } from "../../../../services/categoryServices";
 import { CategoryType } from "../../../../constants/types";
 import { LightTheme } from "../../../../constants/theme";
 

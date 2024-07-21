@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Chip} from "react-native-paper";
 import { CategoryType } from "../../../constants/types";
-import { getCategories } from "../../../providers/categoryProvider";
+import { getCategories } from "../../../services/categoryServices";
 
 type Props = {
     selectedCategories: Array<number>,

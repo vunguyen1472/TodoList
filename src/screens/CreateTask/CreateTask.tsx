@@ -1,17 +1,19 @@
 import React from "react";
 
-import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Button, Text, TextInput, useTheme } from "react-native-paper";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 import { globalStyles } from "../../constants/globalStyles";
 import { LightTheme } from "../../constants/theme";
-import { Controller, Form, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import FormItem from "./components/FormItem";
 import Stack from "../../components/Stack";
 import { dateUniform } from "../../helpers";
-import { createTask } from "../../providers/taskProvider";
+import { createTask } from "../../services/taskServices";
 import { TaskType } from "../../constants/types";
 import { navigate } from "../../navigation/navigation";
+import { useStores } from "../../contexts/root-store-context";
+import { observer } from "mobx-react-lite";
 
 type FormValues = {
     title: string,
@@ -23,6 +25,8 @@ type FormValues = {
 }
 
 const CreateTask = () => {
+    const { taskStore } = useStores();
+
     const {
         control,
         handleSubmit,
@@ -54,8 +58,9 @@ const CreateTask = () => {
 
         createTask(newTask)
         .then(() => {
-            navigate("Home");
             // console.log("Create task successfully")
+            taskStore.addTask(newTask);
+            navigate("Home");
         })
         .catch(error => console.log(error))
     }
@@ -158,7 +163,7 @@ const CreateTask = () => {
     );
 }
 
-export default CreateTask;
+export default observer(CreateTask);
 
 const styles = StyleSheet.create({
     formItem: {

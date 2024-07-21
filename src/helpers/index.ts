@@ -1,3 +1,5 @@
+import { CategoryType, TaskType } from "../constants/types";
+
 export const dateUniform = (date: Date, startTime: Date, endTime: Date) => {
     const newStartTime = new Date(date);
     newStartTime.setHours(startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds())
@@ -16,4 +18,20 @@ export const getCurrentDateString = () => {
         month: "2-digit",
         year: "numeric"
     });
+}
+
+export const isTaskContainSelectedCategories = (task: TaskType, selectedCategories: number[]) => {
+    if (selectedCategories.length == 0){
+        return true;
+    }
+    
+    for (var selectedCategoryId of selectedCategories) {
+        if (!task.category){
+            return false;
+        }
+        if (task.category.includes(selectedCategoryId)) {
+            return true;
+        }
+    }   
+    return false;
 }

@@ -5,4 +5,12 @@ module.exports = {
       plugins: ['react-native-paper/babel'],
     },
   },
+  plugins: [
+    // ['react-native-paper/babel'],
+    ["@babel/plugin-proposal-decorators", {"version": "2023-11" }],
+    ["@babel/plugin-transform-class-static-block"]
+  ],
+  "assumptions": {
+    "setPublicClassFields": false,
+  }
 };

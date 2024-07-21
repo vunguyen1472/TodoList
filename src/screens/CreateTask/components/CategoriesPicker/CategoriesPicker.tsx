@@ -4,7 +4,7 @@ import { ActivityIndicator, Chip } from "react-native-paper";
 import AntdIcon from 'react-native-vector-icons/AntDesign'
 import CategoriesPickerModal from "./CategoriesPickerModal";
 import { CategoryType } from "../../../../constants/types";
-import { getCategories } from "../../../../providers/categoryProvider";
+import { getCategories } from "../../../../services/categoryServices";
 
 type CategoriesPickerProps = {
     value: Array<number>,

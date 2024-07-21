@@ -1,64 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import { getTasks } from "../../providers/taskProvider";
+import { FlatList, StyleSheet, Task, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
 import { TaskType } from "../../constants/types";
 import TaskListItem from "./TaskListItem";
+import { observer } from "mobx-react-lite";
+import { useStores } from "../../contexts/root-store-context";
+import { isTaskContainSelectedCategories } from "../../helpers";
 
-type Props = {
+type Props ={
     selectedCategories: number[]
 }
 
 const TaskList = (props: Props) => {
     const { selectedCategories } = props;
 
-    const [tasks, setTasks] = useState<Array<TaskType>>([]);
-    const [isTasksLoading, setTasksLoading] = useState(true);
-    const [filteredTasks, setFilteredTasks] = useState<Array<TaskType>>([]);
-
-    const isTaskContainSelectedCategories = (task: TaskType) => {
-        if (selectedCategories.length == 0){
-            return true;
-        }
-
-        for (var selectedCategoryId of selectedCategories) {
-            if (!task.category){
-                return false;
-            }
-            if (task.category.includes(selectedCategoryId)) {
-                return true;
-            }
-        }   
-        return false;
-    }
-
-    useEffect(() => {
-        setTasksLoading(true);
-
-        getTasks()
-        .then(res => {
-            setFilteredTasks(res);
-            setTasks(res);
-        })
-        .catch(error => console.log(error))
-        .finally(() => setTasksLoading(false))
-    }, [])
+    const { taskStore } = useStores();
+    const [filteredTasks, setFilteredTasks] = useState<TaskType[]>([]);
 
     useEffect(() => {
         const timeOutId = setTimeout(() => {
-            setFilteredTasks(tasks.filter(task => isTaskContainSelectedCategories(task)))
-        }, 800);
+            const filteredTasks = taskStore.taskList.filter(task => isTaskContainSelectedCategories(task, selectedCategories))
+            setFilteredTasks(filteredTasks);
+        }, 500);
         return () => clearTimeout(timeOutId);
-    }, [selectedCategories])
-
-    if (isTasksLoading){
+    }, [selectedCategories, taskStore.taskList])
+    
+    if (taskStore.isLoading){
         return <ActivityIndicator size={20} animating={true}/>
     }
-
+    
     if (filteredTasks.length == 0){
         return <Text>No tasks found</Text>
     }
-
+    
     return (
         <FlatList 
             data={filteredTasks}
@@ -73,11 +47,12 @@ const TaskList = (props: Props) => {
     );
 }
  
-export default TaskList;
+export default observer(TaskList);
 
 const styles = StyleSheet.create({
     list: {
         flexDirection: 'column',
-        gap: 16
+        gap: 16,
+        paddingBottom: 60
     }
 })
