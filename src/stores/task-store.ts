@@ -34,7 +34,6 @@ export class TaskStore {
             })
     }
 
-    // Mutations
     @action addTask = (newTask: TaskType) => {
         if (!newTask.id){
             newTask.id = this.taskList.length;
@@ -43,31 +42,18 @@ export class TaskStore {
         this.taskList = [...this.taskList, newTask];
     }
 
-    // @action removeTask = (removeTaskId: number) => {
-    //     this.taskList = this.taskList.filter(task => task.id != removeTaskId)
-    // }
+    @action removeTask(taskId: number | undefined) {
+        this.taskList = this.taskList.filter(task => task.id != taskId);
+    }
 
-    // // runInActions
-    // @action getTasks = async () => {
-    //     this.isLoading = true;
-    //     this.error = "null";
-    //     try {
-    //         const tasks = await getTasks();
-    //         runInAction(() => {
-    //             this.taskList = tasks;
-    //             this.isLoading = false
-    //         })
-    //     } catch (error) {
-    //         runInAction(() => {
-    //             this.isLoading = false;
-    //             this.error ="Failed"
-    //         })
-    //     }
-    // }
+    @action editTask(modifiedTask: TaskType) {
+        this.taskList = this.taskList.map(task => {
+            if (task.id != modifiedTask.id){
+                return task
+            }
 
-    // // Computeds
-    // @computed get filteredTaskList(): TaskType[] {
-    //     return this.taskList.filter(task => isTaskContainSelectedCategories(task, this.filteredCategoryIds))
-    // }
+            return modifiedTask
+        })
+    }
 }
 

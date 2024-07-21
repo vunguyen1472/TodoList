@@ -1,11 +1,13 @@
 import React from "react";
-import { TaskType } from "../../constants/types";
+import { TaskType } from "../../../../constants/types";
 import { Swipeable } from "react-native-gesture-handler";
 import { IconButton, Text, useTheme } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import AntdIcon from 'react-native-vector-icons/AntDesign';
-import { LightTheme } from "../../constants/theme";
-import { navigate } from "../../navigation/navigation";
+import { LightTheme } from "../../../../constants/theme";
+import { navigate } from "../../../../navigation/navigation";
+import { removeTask } from "../../../../services/taskServices";
+import { useStores } from "../../../../contexts/root-store-context";
 
 type Props = {
     task: TaskType
@@ -14,6 +16,7 @@ type Props = {
 const TaskListItem = (props: Props) => {
     const theme = useTheme();
     const { task } = props;
+    const { taskStore } = useStores();
 
     const getTaskTimePeriod = (startTime: Date, endTime: Date) => {
         const prefix = new Date(startTime);
@@ -34,15 +37,28 @@ const TaskListItem = (props: Props) => {
     }
 
     const handleDeleteTask = () =>{
+        if (!task.id){
+            return;
+        }
 
+        removeTask(task.id)
+            .then(res => {
+                console.log("Success");
+                taskStore.removeTask(task.id);
+            })
+            .catch(error => console.log("Error: ", error))
     }
 
     const handleViewTask = () => {
-        navigate("ViewTask");
+        navigate("ViewTask", {
+            taskId: task.id
+        });
     }
 
     const handleEditTask = () => {
-        navigate("EditTask")
+        navigate("EditTask", {
+            taskId: task.id
+        })
     }
 
     return <Swipeable

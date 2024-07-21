@@ -5,11 +5,11 @@ export type CategoryType = {
 
 export type TaskType = {
     name: string,
-    description?: string,
+    description: string,
     date: Date,
     startTime: Date,
     endTime: Date,
     status: boolean
-    category?: Array<number>,
+    category: Array<number>,
     id?: number,
 }

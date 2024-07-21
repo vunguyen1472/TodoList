@@ -43,7 +43,7 @@ const App = () => {
             <Stack.Screen name={screenNames.homeTabs} component={HomeTabs} options={{ headerShown: false }} />
 
             {/* Routes not shown on home tabs */}
-            <Stack.Screen name={screenNames.viewTask} component={ViewTask} />
+            <Stack.Screen name={screenNames.viewTask} component={ViewTask} options={{title: ""}}/>
             <Stack.Screen name={screenNames.editTask} component={EditTask} />
         </Stack.Navigator>
     </AppSetup>

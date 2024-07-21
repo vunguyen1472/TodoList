@@ -1,12 +1,9 @@
 import { View } from "react-native";
 import { globalStyles } from "../../constants/globalStyles";
 import { Header } from "./component/Header";
-import TaskList from "../../components/TaskList/TaskList";
+import TaskList from "./component/TaskList/TaskList";
 import CategoryFilter from "./component/CategoryFilter";
-import { useEffect, useState } from "react";
-import { Text } from "react-native-paper";
-
-import { observer } from "mobx-react-lite";
+import { useState } from "react";
 
 const Home = () => {
     const [selectedCategories, setSelectedCategories] =  useState<Array<number>>([]);

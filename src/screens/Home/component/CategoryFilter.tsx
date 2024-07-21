@@ -15,13 +15,12 @@ const CategoryFilter = (props: Props) => {
     const [categories, setCategories] = useState<Array<CategoryType>>([]);
     const [isCategoriesLoading, setCategoriesLoading] = useState(true);
    
-
     useEffect(() => {
         setCategoriesLoading(true);
         getCategories()
-        .then(res => setCategories(res))
-        .catch(error => console.log(error))
-        .finally(() =>{setCategoriesLoading(false)})
+            .then(res => setCategories(res))
+            .catch(error => console.log(error))
+            .finally(() =>{setCategoriesLoading(false)})
     }, [])
 
     const handleCategoryPress = (selectedCategoryId: number) => {

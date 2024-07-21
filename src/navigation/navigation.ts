@@ -1,6 +1,4 @@
-import React from "react";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { createNavigationContainerRef, NavigationContainerRef, ParamListBase } from "@react-navigation/native";
+import { createNavigationContainerRef } from "@react-navigation/native";
 
 export const screenNames = {
     homeTabs: "HomeTabs",

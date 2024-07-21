@@ -19,7 +19,11 @@ const FormItem = (props: Props) => {
     const theme = useTheme();
 
     const renderInputComponent = () => {
-        if (type === "text" && typeof(value) === "string"){
+        if (type === "text"){
+            if (typeof(value) != "string"){
+                return undefined
+            }
+
             return <TextInput 
                 mode="outlined"
                 value={value}
@@ -28,23 +32,35 @@ const FormItem = (props: Props) => {
             />
         }
 
-        if ((type === "date" || type === "time") && value instanceof Date) {
+        if ((type === "date" || type === "time")) {
+            if (!(value instanceof Date)) {
+                return undefined
+            }
+
             return <DateTimeInput
                 mode={type}
-                value={value}
+                value={new Date(value)}
                 onChange={onChange}
                 onBlur={onBlur}
             />
         }
 
-        if (type === "select" && value instanceof Array){
+        if (type === "select"){
+            if (!Array.isArray(value)) {
+                return undefined;
+            }
+
             return <CategoriesPicker 
                 value={value}
                 onChange={onChange}
             />
         }
 
-        if (type === "textarea" && typeof(value) === "string"){
+        if (type === "textarea"){
+            if (typeof(value) != "string"){
+                return undefined
+            }
+
             return <TextInput 
                 mode="outlined"
                 numberOfLines={4}

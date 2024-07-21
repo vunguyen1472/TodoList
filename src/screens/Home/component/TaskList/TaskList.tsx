@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Task, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
-import { TaskType } from "../../constants/types";
+import { TaskType } from "../../../../constants/types";
 import TaskListItem from "./TaskListItem";
 import { observer } from "mobx-react-lite";
-import { useStores } from "../../contexts/root-store-context";
-import { isTaskContainSelectedCategories } from "../../helpers";
+import { useStores } from "../../../../contexts/root-store-context";
+import { isTaskContainSelectedCategories } from "../../../../helpers";
 
 type Props ={
     selectedCategories: number[]

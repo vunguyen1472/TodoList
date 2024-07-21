@@ -51,6 +51,10 @@ const CategoriesPicker = (props: CategoriesPickerProps) => {
     const [isCategoriesLoading, setCategoriesLoading] = useState(true);
     
     useEffect(() => {
+        setSelectedCategories(value);
+    }, [])
+
+    useEffect(() => {
         setCategoriesLoading(true);
 
         getCategories().then(res =>

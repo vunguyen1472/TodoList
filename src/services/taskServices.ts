@@ -10,6 +10,16 @@ export const getTasks = async () => {
     } 
 }
 
+export const getTask = async (id: number):Promise<TaskType> => {
+    try {
+        const response = await fetch(`https://66863e1e83c983911b014bc2.mockapi.io/task/${id}`)
+        const json = await response.json();
+        return Promise.resolve(json);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
 export const createTask = async (task: TaskType) => {
     try {
         const response = await fetch("https://66863e1e83c983911b014bc2.mockapi.io/task", {
@@ -46,5 +56,27 @@ export const removeTask = async (taskId: number) => {
         Promise.resolve(response);
     } catch (error) {
         return Promise.reject(error)
+    }
+}
+
+export const editTask = async (task: TaskType) => {
+    try {
+        const response = await fetch(`https://66863e1e83c983911b014bc2.mockapi.io/task/${task.id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: task.name,
+                description: task.description,
+                startTime: task.startTime,
+                endTime: task.endTime,
+                category: task.category,
+                status: task.status
+            })
+        })
+        Promise.resolve(response);
+    } catch (error) {
+        Promise.reject(error);
     }
 }
